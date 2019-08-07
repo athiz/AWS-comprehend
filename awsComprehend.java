@@ -17,8 +17,6 @@ public class awsComprehend
 
         String text = "Its raining beautifully";
         
-        // Create credentials using a provider chain. For more information, see
-        // https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html
         AWSCredentialsProvider awsCreds = DefaultAWSCredentialsProviderChain.getInstance();
  
         AmazonComprehend comprehendClient =
@@ -32,9 +30,7 @@ public class awsComprehend
         DetectDominantLanguageRequest detectDominantLanguageRequest = new DetectDominantLanguageRequest().withText(text);
         DetectDominantLanguageResult detectDominantLanguageResult = comprehendClient.detectDominantLanguage(detectDominantLanguageRequest);
         detectDominantLanguageResult.getLanguages().forEach(x -> {
-        System.out.println(x);
-        
-        
+        	System.out.println(x);
 	        DetectSyntaxRequest detectSyntaxRequest = new DetectSyntaxRequest().withText(text).withLanguageCode(x.getLanguageCode());
 	        DetectSyntaxResult detectSyntaxResult = comprehendClient.detectSyntax(detectSyntaxRequest);
 	        detectSyntaxResult.getSyntaxTokens().forEach(y -> {
@@ -43,7 +39,6 @@ public class awsComprehend
 	        
 	        
         });
-        System.out.println("Calling DetectDominantLanguage\n");
         System.out.println("Done");
     }
 }
